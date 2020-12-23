@@ -43,7 +43,7 @@ jobs:
           docker pull checkpoint/shiftleft
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan -i /tmp/dvwa.tar
           
-  Code_Scanner:
+  CloudGuard_Code_Scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -54,7 +54,7 @@ jobs:
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
           # docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_SOURCEGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_SOURCEGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
           
-  Code_Scanner2:
+  SourceGuard_Code_Scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
