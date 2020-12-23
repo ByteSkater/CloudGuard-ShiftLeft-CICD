@@ -50,9 +50,7 @@ jobs:
       - name: Run SourceGuard scan on code using CloudGuard
         run: |
           docker pull checkpoint/shiftleft
-          # UNCOMMENT ONLY ONE OF THE FOLLOWING LINES to perform codescan using either CLOUDGUARD NATIVE or SOURCEGUARD as the backend
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
-          # docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_SOURCEGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_SOURCEGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
           
   SourceGuard_Code_Scanner:
     runs-on: ubuntu-latest
@@ -61,6 +59,4 @@ jobs:
       - name: Run SourceGuard scan on code using SourceGuard
         run: |
           docker pull checkpoint/shiftleft
-          # UNCOMMENT ONLY ONE OF THE FOLLOWING LINES to perform codescan using either CLOUDGUARD NATIVE or SOURCEGUARD as the backend
-          # docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_SOURCEGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_SOURCEGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
