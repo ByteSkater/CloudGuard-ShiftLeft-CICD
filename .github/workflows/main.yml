@@ -30,7 +30,7 @@ jobs:
       - name: Run IAC assessment on Terraform folder
         run: |
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft iac-assessment -p /tmp/terraform/ -r 64
-  Image_Scanner:
+  CloudGuard_Image_Scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -42,8 +42,20 @@ jobs:
         run: |  
           docker pull checkpoint/shiftleft
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan -i /tmp/dvwa.tar
+  SourceGuard_Image_Scanner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pull DVWA web application from vulnerables/web-dvwa
+        run: |
+          docker pull vulnerables/web-dvwa
+          docker save vulnerables/web-dvwa -o dvwa.tar
+      - name: Run Shiftleft assessment on saved image
+        run: |  
+          docker pull checkpoint/shiftleft
+          docker run -v=$(pwd):/tmp/ -e "SG_CLIENT_ID=${{ secrets.CHKP_SOURCEGUARD_ID }}" -e "SG_SECRET_KEY=${{ secrets.CHKP_SOURCEGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan -i /tmp/dvwa.tar
           
-  CloudGuard_Code_Scanner:
+   CloudGuard_Code_Scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
