@@ -53,7 +53,7 @@ jobs:
       - name: Run Shiftleft assessment on saved image
         run: |  
           docker pull checkpoint/shiftleft
-          docker run -v=$(pwd):/tmp/ -e "SG_CLIENT_ID=${{ secrets.CHKP_SOURCEGUARD_ID }}" -e "SG_SECRET_KEY=${{ secrets.CHKP_SOURCEGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan -i /tmp/dvwa.tar
+          docker run -v=$(pwd):/tmp/ -e "SG_CLIENT_ID=${{ secrets.SG_CLIENT_ID }}" -e "SG_SECRET_KEY=${{ secrets.SG_SECRET_ID }}" checkpoint/shiftleft shiftleft image-scan -i /tmp/dvwa.tar
           
   CloudGuard_Code_Scanner:
     runs-on: ubuntu-latest
@@ -71,4 +71,4 @@ jobs:
       - name: Run SourceGuard scan on code using SourceGuard
         run: |
           docker pull checkpoint/shiftleft
-          docker run -v=$(pwd):/tmp/ -e "SG_CLIENT_ID=${{ secrets.CHKP_SOURCEGUARD_ID }}" -e "SG_SECRET_KEY=${{ secrets.CHKP_SOURCEGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
+          docker run -v=$(pwd):/tmp/ -e "SG_CLIENT_ID=${{ secrets.SG_CLIENT_ID }}" -e "SG_SECRET_KEY=${{ secrets.SG_SECRET_ID }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
