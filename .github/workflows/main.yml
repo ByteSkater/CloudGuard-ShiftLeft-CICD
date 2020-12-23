@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions.
+           # This is a basic workflow to help you get started with Actions.
 
 name: Check Point CloudGuard Assessment
 
@@ -53,8 +53,8 @@ jobs:
           # UNCOMMENT ONLY ONE OF THE FOLLOWING LINES to perform codescan using either CLOUDGUARD NATIVE or SOURCEGUARD as the backend
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
           # docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_SOURCEGUARD_ID }}" -e "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_SOURCEGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/
-
- Code_Scanner2:
+          
+  Code_Scanner2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
